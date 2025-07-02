@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>预约下单</title>
+</head>
+<body>
+<h1>预约下单</h1>
+<form action="/appointments/book" method="post">
+    <input type="hidden" name="studentId" value="1" />
+    <input type="hidden" name="teacherId" value="1" />
+    <label for="subject">科目：</label>
+    <input type="text" id="subject" name="subject" required placeholder="请输入科目" /><br/>
+    <label for="startTime">开始时间：</label>
+    <input type="datetime-local" id="startTime" name="startTime" required title="请选择开始时间" /><br/>
+    <label for="endTime">结束时间：</label>
+    <input type="datetime-local" id="endTime" name="endTime" required title="请选择结束时间" /><br/>
+    <input type="hidden" name="status" value="PENDING" />
+    <button type="submit">提交预约</button>
+</form>
+</body>
+</html> 

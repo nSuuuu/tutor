@@ -1,0 +1,123 @@
+spring:
+  main:
+    web-application-type: reactive
+  config:
+    import: nacos:pms-gateway.yaml
+  application:
+    name: pms-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        # 登录注册页面优先路由到主服务
+        - id: login-page
+          uri: http://localhost:8081
+          predicates:
+            - Path=/login
+            - Path=/register
+            - Path=/api/login
+            - Path=/api/register
+          filters:
+            - StripPrefix=0
+
+        # 用户服务路由
+        - id: pms-user-service
+          uri: lb://pms-user-service
+          predicates:
+            - Path=/api/user/**
+          filters:
+            - StripPrefix=0
+            
+        # 课程服务路由
+        - id: pms-course-service
+          uri: lb://pms-course-service
+          predicates:
+            - Path=/api/course/**
+          filters:
+            - StripPrefix=0
+            
+        # 订单服务路由
+        - id: pms-order-service
+          uri: lb://pms-order-service
+          predicates:
+            - Path=/api/order/**
+          filters:
+            - StripPrefix=0
+            
+        # 预约服务路由
+        - id: pms-appointment-service
+          uri: lb://pms-appointment-service
+          predicates:
+            - Path=/api/appointment/**
+          filters:
+            - StripPrefix=0
+            
+        # 通知服务路由
+        - id: pms-notice-service
+          uri: lb://pms-notice-service
+          predicates:
+            - Path=/api/notice/**
+          filters:
+            - StripPrefix=0
+            
+        # 学生服务路由
+        - id: pms-student-service
+          uri: lb://pms-student-service
+          predicates:
+            - Path=/api/student/**
+          filters:
+            - StripPrefix=0
+            
+        # 教师服务路由
+        - id: pms-teacher-service
+          uri: lb://pms-teacher-service
+          predicates:
+            - Path=/api/teachers/**
+          filters:
+            - StripPrefix=0
+            
+        # 聊天服务路由
+        - id: pms-chat-service
+          uri: lb://pms-chat-service
+          predicates:
+            - Path=/api/chat/**
+          filters:
+            - StripPrefix=0
+            
+        # 地区服务路由
+        - id: pms-region-service
+          uri: lb://pms-region-service
+          predicates:
+            - Path=/api/region/**
+          filters:
+            - StripPrefix=0
+        # 全局页面转发路由
+        - id: main-web
+          uri: http://localhost:8081
+          predicates:
+            - Path=/**
+          filters:
+            - StripPrefix=0
+
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        namespace: pms
+        group: DEFAULT_GROUP
+      config:
+        server-addr: 127.0.0.1:8848
+        namespace: pms
+        group: DEFAULT_GROUP
+        file-extension: yaml
+
+server:
+  port: 8080
+
+# 日志配置
+logging:
+  level:
+    org.springframework.cloud.gateway: debug
+    com.niit: debug 

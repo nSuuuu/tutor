@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.7.18</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>com.niit</groupId>
+    <artifactId>pms</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+    <name>pms</name>
+    <description>PMS Spring Cloud微服务项目</description>
+    
+    <modules>
+        <module>pms-api</module>
+        <module>pms-common</module>
+        <module>pms-user-service</module>
+        <module>pms-course-service</module>
+        <module>pms-order-service</module>
+        <module>pms-appointment-service</module>
+        <module>pms-notice-service</module>
+        <module>pms-student-service</module>
+        <module>pms-teacher-service</module>
+        <module>pms-chat-service</module>
+        <module>pms-region-service</module>
+        <module>pms-gateway</module>
+    </modules>
+
+    <properties>
+        <java.version>8</java.version>
+        <mysql.version>8.0.33</mysql.version>
+        <mybatis.version>2.3.2</mybatis.version>
+        <spring-cloud.version>2021.0.8</spring-cloud.version>
+        <cloud-alibaba.version>2021.0.5.0</cloud-alibaba.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+    </properties>
+
+    <!-- Maven的dependencyManagement元素提供了一种管理依赖版本号的方式 -->
+    <dependencyManagement>
+        <dependencies>
+            <!-- Spring Cloud 依赖管理 -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            
+            <!-- Spring Cloud Alibaba 依赖管理 -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${cloud-alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            
+            <!-- MySQL 版本管理 -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+            
+            <!-- MyBatis 版本管理 -->
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${mybatis.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <!-- Spring Boot Starter Test -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        
+        <!-- Lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        
+        <!-- Thymeleaf 页面模板引擎 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- 父pom不再全局配置spring-boot-maven-plugin，交由各微服务子模块单独配置 -->
+        </plugins>
+    </build>
+
+</project>

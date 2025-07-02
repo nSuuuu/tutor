@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="pms-appointment-service" />
+        <module name="pms-region-service" />
+        <module name="pms-common" />
+        <module name="pms-notice-service" />
+        <module name="pms-user-service" />
+        <module name="pms-chat-service" />
+        <module name="pms-teacher-service" />
+        <module name="pms-api" />
+        <module name="pms-course-service" />
+        <module name="pms-order-service" />
+        <module name="pms-student-service" />
+        <module name="pms-gateway" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="pms" options="" />
+      <module name="pms-api" options="-parameters" />
+      <module name="pms-appointment-service" options="-parameters" />
+      <module name="pms-chat-service" options="-parameters" />
+      <module name="pms-common" options="-parameters" />
+      <module name="pms-course-service" options="-parameters" />
+      <module name="pms-gateway" options="-parameters" />
+      <module name="pms-notice-service" options="-parameters" />
+      <module name="pms-order-service" options="-parameters" />
+      <module name="pms-region-service" options="-parameters" />
+      <module name="pms-student-service" options="-parameters" />
+      <module name="pms-teacher-service" options="-parameters" />
+      <module name="pms-user-service" options="-parameters" />
+    </option>
+  </component>
+</project>

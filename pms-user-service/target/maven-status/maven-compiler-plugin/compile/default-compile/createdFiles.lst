@@ -1,0 +1,5 @@
+com\niit\userservice\service\UserService.class
+com\niit\userservice\UserServiceApplication.class
+com\niit\userservice\controller\UserController.class
+com\niit\userservice\repository\UserRepository.class
+com\niit\userservice\service\impl\UserServiceImpl.class

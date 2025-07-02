@@ -1,0 +1,5 @@
+com\niit\regionservice\RegionServiceApplication.class
+com\niit\regionservice\controller\RegionController.class
+com\niit\regionservice\repository\RegionRepository.class
+com\niit\regionservice\service\impl\RegionServiceImpl.class
+com\niit\regionservice\service\RegionService.class

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>家教管理系统-首页</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9ff;
+            margin: 0;
+            padding: 0;
+        }
+        .sidebar {
+            min-height: 100vh;
+            background: #343a40;
+            color: #fff;
+            padding-top: 2rem;
+        }
+        .sidebar .nav-link {
+            color: #fff;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            border-radius: 0.5rem;
+            transition: background 0.2s;
+        }
+        .sidebar .nav-link.active, .sidebar .nav-link:hover {
+            background: #4169e1;
+            color: #fff;
+        }
+        .sidebar .nav-link i {
+            margin-right: 0.7rem;
+        }
+        .main-content {
+            padding: 2rem;
+            height: 100vh;
+            overflow-y: auto;
+            background-color: #f8f9ff;
+        }
+        .navbar-brand {
+            font-weight: bold;
+            color: #fff !important;
+        }
+
+        /* 用户统计卡片样式 */
+        .stats-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+        }
+        .stats-row {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            width: 100%;
+        }
+        .stats-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            width: 300px;
+            box-shadow: 0 4px 15px rgba(100, 149, 237, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .stats-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(65, 105, 225, 0.2);
+        }
+        .stats-title {
+            font-size: 1.2rem;
+            color: #6c757d;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .stats-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #4169e1;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+        .stats-description {
+            color: #858796;
+            font-size: 1rem;
+            text-align: center;
+        }
+        .rolling-number {
+            display: inline-block;
+            position: relative;
+            height: 1em;
+            line-height: 1;
+        }
+        .welcome-message {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #4169e1;
+            font-size: 2rem;
+            font-weight: bold;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .alert-warning {
+            background-color: #fff3e0;
+            border-color: #ffe0b2;
+            color: #f57c00;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <!-- 侧边栏 -->
+        <nav class="col-md-2 d-none d-md-block sidebar">
+            <div class="position-sticky">
+                <a class="navbar-brand d-block mb-4 text-center" href="/">家教管理系统</a>
+                <!-- 在 index.html 的侧边栏部分修改为以下内容 -->
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/"><i class="fas fa-home"></i>首页</a>
+                    </li>
+                    <li th:if="${session.user.role == 2}" class="nav-item">
+                        <a class="nav-link" href="/student/center"><i class="fas fa-user-graduate"></i>学生中心</a>
+                    </li>
+                    <li th:if="${session.user.role == 1}" class="nav-item">
+                        <a class="nav-link" href="/teacher/center"><i class="fas fa-chalkboard-teacher"></i>老师中心</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/select"><i class="fas fa-search"></i>家教咨询</a>
+                    </li>
+                    <li class="nav-item" th:if="${session.user != null}">
+                        <a class="nav-link" th:href="${session.user.role == 1 ? '/orders/teacher' : '/orders/my'}">
+                            <i class="fas fa-file-invoice"></i>
+                            <span th:text="${session.user.role == 1 ? '收到的订单' : '我的订单'}"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/notices"><i class="fas fa-bell"></i>消息通知</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/chat/list"><i class="fas fa-comments"></i>私信聊天</a>
+                    </li>
+                    <li class="nav-item" th:if="${session.user != null}">
+                        <a class="nav-link" th:href="${session.user.role == 1 ? '/schedule_teacher' : '/schedule'}">
+                            <i class="fas fa-history"></i>课程日程
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/stats"><i class="fas fa-chart-bar"></i>统计分析</a>
+                    </li>
+                    <li class="nav-item" th:if="${session.user != null}">
+                        <a class="nav-link" th:href="${session.user.role == 1 ? '/appointments/teacher' : '/appointments/student'}">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span th:text="${session.user.role == 1 ? '收到的预约' : '我的预约'}"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item mt-4">
+                        <a class="nav-link" href="/logout"><i class="fas fa-sign-out-alt"></i>退出登录</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!-- 主内容区 -->
+        <main class="col-md-10 ms-sm-auto main-content" id="mainContent">
+            <!-- 新增未读私信弹窗 -->
+            <div th:if="${unreadCount != null && unreadCount > 0}"
+                 th:attr="data-unread=${unreadCount}"
+                 id="unreadMessageAlert"
+                 class="alert alert-warning alert-dismissible fade show mb-4"
+                 role="alert">
+                你有 <strong th:text="${unreadCount}">0</strong> 条新私信消息！
+                <a href="/chat/list" class="ms-2" id="viewMessagesLink">点击查看</a>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+            <!-- 欢迎语 -->
+            <div class="welcome-message">
+                欢迎来到家教管理系统，我们开课啦！！！
+            </div>
+
+            <!-- 用户统计卡片 -->
+            <div class="stats-container">
+                <div class="stats-row">
+                    <div class="stats-card">
+                        <h6 class="stats-title">注册用户</h6>
+                        <div class="stats-value">
+                            <span id="userCount" class="rolling-number">0</span>+
+                        </div>
+                        <p class="stats-description">平台已有用户数量</p>
+                    </div>
+                    <div class="stats-card">
+                        <h6 class="stats-title">认证教师</h6>
+                        <div class="stats-value">
+                            <span id="teacherCount" class="rolling-number">0</span>+
+                        </div>
+                        <p class="stats-description">专业认证教师数量</p>
+                    </div>
+                </div>
+                <div class="stats-row">
+                    <div class="stats-card">
+                        <h6 class="stats-title">完成课程</h6>
+                        <div class="stats-value">
+                            <span id="courseCount" class="rolling-number">0</span>+
+                        </div>
+                        <p class="stats-description">已完成课程总数</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // 数字滚动动画函数
+    function animateValue(id, start, end, duration) {
+        const obj = document.getElementById(id);
+        if (!obj) return;
+
+        const range = end - start;
+        const minStepTime = 50;
+        const stepTime = Math.max(Math.floor(duration / range), minStepTime);
+
+        const startTime = new Date().getTime();
+        const endTime = startTime + duration;
+
+        let timer;
+
+        function update() {
+            const now = new Date().getTime();
+            const progress = Math.min((now - startTime) / duration, 1);
+            const value = Math.round(start + range * progress);
+            obj.textContent = value;
+
+            if (progress === 1) {
+                clearInterval(timer);
+            }
+        }
+
+        timer = setInterval(update, stepTime);
+        update(); // 立即执行一次
+    }
+
+    // 处理未读消息提示弹窗逻辑
+    function setupUnreadMessageAlert() {
+        const alertElement = document.getElementById('unreadMessageAlert');
+        const viewMessagesLink = document.getElementById('viewMessagesLink');
+
+        if (!alertElement || !viewMessagesLink) return;
+
+        const unreadCount = parseInt(alertElement.getAttribute('data-unread'), 10);
+        const lastReadCount = parseInt(localStorage.getItem('lastReadCount'), 10);
+
+        // 如果没有新消息或已读过，则隐藏弹窗
+        if (!isNaN(lastReadCount) && lastReadCount >= unreadCount) {
+            alertElement.style.display = 'none';
+            return;
+        }
+
+        // 添加点击事件监听器
+        viewMessagesLink.addEventListener('click', function (e) {
+            localStorage.setItem('lastReadCount', unreadCount);
+
+            // 使用 Bootstrap 的 Alert 实例关闭弹窗
+            const alertInstance = bootstrap.Alert.getOrCreateInstance(alertElement);
+            alertInstance.close();
+        });
+    }
+
+    // 页面加载完成后执行初始化
+    document.addEventListener('DOMContentLoaded', function () {
+        // 初始化数字滚动动画
+        animateValue("userCount", 0, 12580, 2000);
+        animateValue("teacherCount", 0, 856, 2000);
+        animateValue("courseCount", 0, 3245, 2000);
+
+        // 初始化未读消息弹窗逻辑
+        setupUnreadMessageAlert();
+    });
+</script>
+</body>
+</html>

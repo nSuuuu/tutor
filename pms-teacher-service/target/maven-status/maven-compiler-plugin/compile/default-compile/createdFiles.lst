@@ -1,0 +1,5 @@
+com\niit\teacherservice\controller\TeacherController.class
+com\niit\teacherservice\service\TeacherService.class
+com\niit\teacherservice\TeacherServiceApplication.class
+com\niit\teacherservice\repository\TeacherRepository.class
+com\niit\teacherservice\service\impl\TeacherServiceImpl.class

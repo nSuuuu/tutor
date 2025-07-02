@@ -1,0 +1,17 @@
+com\niit\common\entity\HupRegion.class
+com\niit\common\entity\Region.class
+com\niit\common\util\Result.class
+com\niit\common\entity\Course$CourseStatus.class
+com\niit\common\entity\Course.class
+com\niit\common\entity\Order$OrderStatus.class
+com\niit\common\util\BusinessException.class
+com\niit\common\entity\Order.class
+com\niit\common\entity\ChatMessage.class
+com\niit\common\entity\Appointment.class
+com\niit\common\entity\Course$CourseType.class
+com\niit\common\entity\Teacher.class
+com\niit\common\entity\Student.class
+com\niit\common\entity\Order$PayMethod.class
+com\niit\common\entity\Notice.class
+com\niit\common\entity\User.class
+com\niit\common\entity\User$Gender.class

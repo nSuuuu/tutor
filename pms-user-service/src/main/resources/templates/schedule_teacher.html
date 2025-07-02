@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>老师课表</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background-color:
+                    #f8f9ff; color: #333;
+        }
+        .container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-top: 2rem;
+            box-shadow: 0 4px 15px rgba(100, 149, 237, 0.1);
+        }
+        h1 {
+            color: #4169e1;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        .calendar-table {
+            background-color: white;
+            color: #333;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #e0e8ff;
+        }
+        .calendar-table th {
+            background-color: #6495ed;
+            color: white;
+            border-color: #6495ed;
+            text-align: center;
+        }
+        .calendar-table td {
+            border-color: #e0e8ff;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .calendar-table td:hover {
+            background-color: #e6f0ff !important;
+            cursor: pointer;
+        }
+        .calendar-table td.selected-day {
+            background-color: #4169e1 !important;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 0 8px rgba(65, 105, 225, 0.3);
+        }
+        .table {
+            background-color: white;
+            color: #333;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #e0e8ff;
+        }
+        .table th {
+            background-color: #6495ed;
+            color: white;
+            border-color: #6495ed;
+        }
+        .table td {
+            border-color: #e0e8ff;
+        }
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: rgba(100, 149, 237, 0.05);
+        }
+        .btn-outline-secondary {
+            color: #4169e1;
+            border-color: #4169e1;
+        }
+        .btn-outline-secondary:hover {
+            background-color: #4169e1;
+            color: white;
+            border-color: #4169e1;
+        }
+        #calendarTitle {
+            color: #4169e1;
+            min-width: 150px;
+            display: inline-block;
+            text-align: center;
+            font-weight: 500;
+        }
+        h3 {
+            color: #4169e1;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+    <div class="container">
+        <a class="navbar-brand" href="/">家教平台</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">首页</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/select">老师咨询</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/courses">我的课程</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+                        <span th:text="${teacher?.user?.realName ?: 'N/A'}">老师</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/teacher/center">个人中心</a></li>
+                        <li><a class="dropdown-item" href="/teacher/profile">编辑资料</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="/logout">退出登录</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <h1 class="mt-4">老师课表</h1>
+    <div class="d-flex align-items-center mb-4">
+        <button class="btn btn-outline-secondary btn-sm me-2" id="prevYear" title="上一年">« 年</button>
+        <button class="btn btn-outline-secondary btn-sm me-2" id="prevMonth" title="上一月">‹ 月</button>
+        <span id="calendarTitle" style="font-weight:bold;font-size:1.2rem;"></span>
+        <button class="btn btn-outline-secondary btn-sm ms-2" id="nextMonth" title="下一月">月 ›</button>
+        <button class="btn btn-outline-secondary btn-sm ms-2" id="nextYear" title="下一年">年 »</button>
+    </div>
+    <div id="calendar"></div>
+    <h3 class="mt-4 mb-3">授课安排</h3>
+    <table class="table table-striped mt-2">
+        <thead>
+        <tr>
+            <th>科目</th>
+            <th>学生</th>
+            <th>开始时间</th>
+            <th>结束时间</th>
+            <th>状态</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="appt : ${appointments != null} ? ${appointments} : ${T(java.util.Collections).emptyList()}">
+            <td th:text="${appt.subject}"></td>
+            <td th:text="${appt.studentName}"></td>
+            <td th:text="${#temporals.format(appt.startTime, 'yyyy-MM-dd HH:mm')}"></td>
+            <td th:text="${#temporals.format(appt.endTime, 'yyyy-MM-dd HH:mm')}"></td>
+            <td th:text="${appt.status}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script th:inline="javascript">
+    var courseDates = [[${courseDates}]];
+    var today = new Date();
+    var currentYear = today.getFullYear();
+    var currentMonth = today.getMonth();
+    function renderCalendar(year, month) {
+        var firstDay = new Date(year, month, 1);
+        var lastDay = new Date(year, month + 1, 0);
+        var html = '<table class="table calendar-table"><thead><tr>';
+        var weekDays = ['日','一','二','三','四','五','六'];
+        for (var i = 0; i < 7; i++) html += '<th>' + weekDays[i] + '</th>';
+        html += '</tr></thead><tbody><tr>';
+        for (var i = 0; i < firstDay.getDay(); i++) html += '<td></td>';
+        for (var d = 1; d <= lastDay.getDate(); d++) {
+            var dateStr = year + '-' + String(month+1).padStart(2,'0') + '-' + String(d).padStart(2,'0');
+            var isSelected = courseDates.includes(dateStr);
+            html += '<td class="' + (isSelected ? 'selected-day' : '') + '">' + d + '</td>';
+            if ((firstDay.getDay() + d) % 7 === 0) html += '</tr><tr>';
+        }
+        html += '</tr></tbody></table>';
+        document.getElementById('calendar').innerHTML = html;
+        document.getElementById('calendarTitle').innerText = year + '年' + String(month+1).padStart(2,'0') + '月';
+    }
+    function updateCalendar() { renderCalendar(currentYear, currentMonth); }
+    document.getElementById('prevMonth').onclick = function() { currentMonth--; if (currentMonth < 0) { currentMonth = 11; currentYear--; } updateCalendar(); };
+    document.getElementById('nextMonth').onclick = function() { currentMonth++; if (currentMonth > 11) { currentMonth = 0; currentYear++; } updateCalendar(); };
+    document.getElementById('prevYear').onclick = function() { currentYear--; updateCalendar(); };
+    document.getElementById('nextYear').onclick = function() { currentYear++; updateCalendar(); };
+    updateCalendar();
+</script>
+</body>
+</html> 
