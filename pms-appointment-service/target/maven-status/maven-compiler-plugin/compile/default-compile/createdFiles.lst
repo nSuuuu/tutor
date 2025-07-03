@@ -1,5 +1,0 @@
-com\niit\appointmentservice\AppointmentServiceApplication.class
-com\niit\appointmentservice\repository\AppointmentRepository.class
-com\niit\appointmentservice\service\impl\AppointmentServiceImpl.class
-com\niit\appointmentservice\controller\AppointmentController.class
-com\niit\appointmentservice\service\AppointmentService.class

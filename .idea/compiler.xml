@@ -7,20 +7,22 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="pms-appointment-service" />
-        <module name="pms-region-service" />
-        <module name="pms-common" />
-        <module name="pms-notice-service" />
-        <module name="pms-user-service" />
-        <module name="pms-chat-service" />
-        <module name="pms-teacher-service" />
-        <module name="pms-api" />
         <module name="pms-course-service" />
+        <module name="pms-notice-service" />
         <module name="pms-order-service" />
-        <module name="pms-student-service" />
+        <module name="pms-user-service" />
         <module name="pms-gateway" />
+        <module name="pms-api" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="pms-appointment-service" target="17" />
+      <module name="pms-chat-service" target="1.8" />
+      <module name="pms-common" target="17" />
+      <module name="pms-region-service" target="1.8" />
+      <module name="pms-student-service" target="17" />
+      <module name="pms-teacher-service" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">

@@ -17,16 +17,10 @@
     
     <modules>
         <module>pms-api</module>
-        <module>pms-common</module>
         <module>pms-user-service</module>
         <module>pms-course-service</module>
         <module>pms-order-service</module>
-        <module>pms-appointment-service</module>
         <module>pms-notice-service</module>
-        <module>pms-student-service</module>
-        <module>pms-teacher-service</module>
-        <module>pms-chat-service</module>
-        <module>pms-region-service</module>
         <module>pms-gateway</module>
     </modules>
 

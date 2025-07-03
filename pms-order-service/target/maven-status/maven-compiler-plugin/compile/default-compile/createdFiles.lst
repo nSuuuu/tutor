@@ -1,5 +1,0 @@
-com\niit\orderservice\OrderServiceApplication.class
-com\niit\orderservice\repository\OrderRepository.class
-com\niit\orderservice\service\impl\OrderServiceImpl.class
-com\niit\orderservice\service\OrderService.class
-com\niit\orderservice\controller\OrderController.class

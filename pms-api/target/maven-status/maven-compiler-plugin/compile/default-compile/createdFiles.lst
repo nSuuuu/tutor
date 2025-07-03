@@ -1,8 +1,0 @@
-com\niit\api\feign\StudentFeignClient.class
-com\niit\api\feign\OrderFeignClient.class
-com\niit\api\feign\NoticeFeignClient.class
-com\niit\api\feign\RegionFeignClient.class
-com\niit\api\feign\ChatFeignClient.class
-com\niit\api\feign\TeacherFeignClient.class
-com\niit\api\feign\AppointmentFeignClient.class
-com\niit\api\feign\UserFeignClient.class

@@ -1,7 +1,0 @@
-com\niit\chatservice\service\impl\ChatServiceImpl.class
-com\niit\chatservice\controller\ChatController.class
-com\niit\chatservice\service\ChatService.class
-com\niit\chatservice\websocket\ChatWebSocketHandler.class
-com\niit\chatservice\config\WebSocketConfig.class
-com\niit\chatservice\repository\ChatMessageRepository.class
-com\niit\chatservice\ChatServiceApplication.class

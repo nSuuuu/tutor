@@ -27,7 +27,7 @@
         <!-- 公共模块 -->
         <dependency>
             <groupId>com.niit</groupId>
-            <artifactId>pms-common</artifactId>
+            <artifactId>pms-api</artifactId>
             <version>1.0.0</version>
         </dependency>
         <dependency>

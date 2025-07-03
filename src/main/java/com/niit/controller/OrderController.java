@@ -21,7 +21,7 @@ import java.time.Duration;
 
 import java.util.List;
 import com.niit.common.util.Result;
-import com.niit.common.entity.ChatMessage;
+import com.niit.api.entity.ChatMessage;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 @EntityScan(basePackages = {"com.niit.common.entity"})

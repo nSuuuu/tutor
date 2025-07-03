@@ -1,5 +1,0 @@
-com\niit\studentservice\controller\StudentController.class
-com\niit\studentservice\service\StudentService.class
-com\niit\studentservice\service\impl\StudentServiceImpl.class
-com\niit\studentservice\repository\StudentRepository.class
-com\niit\studentservice\StudentServiceApplication.class

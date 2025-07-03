@@ -197,7 +197,7 @@
                         <img th:src="${teacher.avatar != null ? teacher.avatar : 'https://via.placeholder.com/80x80?text=头像'}"
                              class="teacher-avatar me-3" alt="头像">
                         <div>
-                            <h5 class="card-title mb-1" th:text="${teacher.realName}">老师姓名</h5>
+                            <h5 class="card-title mb-1" th:text="${teacher.user.realName}">老师姓名</h5>
                             <span class="grade-badge" th:text="${teacher.gradeLevel}">年级</span>
                         </div>
                     </div>
@@ -249,7 +249,7 @@
         <div class="modal-dialog">
             <form th:action="@{/appointments/book}" method="post" class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">预约老师：<span th:text="${teacher.realName}"></span></h5>
+                    <h5 class="modal-title">预约老师：<span th:text="${teacher.user.realName}"></span></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">

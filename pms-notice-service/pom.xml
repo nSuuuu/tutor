@@ -17,7 +17,7 @@
         <!-- 公共模块依赖 -->
         <dependency>
             <groupId>com.niit</groupId>
-            <artifactId>pms-common</artifactId>
+            <artifactId>pms-api</artifactId>
             <version>1.0.0</version>
         </dependency>
         <dependency>
@@ -53,6 +53,12 @@
             <groupId>com.niit</groupId>
             <artifactId>pms-api</artifactId>
             <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.niit</groupId>
+            <artifactId>pms-course-service</artifactId>
+            <version>1.0.0</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 
