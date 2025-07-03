@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@FeignClient(name = "pms-teacher-service")
+@FeignClient(name = "pms-user-service")
 public interface TeacherFeignClient {
     
     @GetMapping("/teacher/list")

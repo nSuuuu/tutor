@@ -47,13 +47,13 @@ spring:
           filters:
             - StripPrefix=0
             
-        # 预约服务路由
-        - id: pms-appointment-service
-          uri: lb://pms-appointment-service
-          predicates:
-            - Path=/api/appointment/**
-          filters:
-            - StripPrefix=0
+#        # 预约服务路由
+#        - id: pms-appointment-service
+#          uri: lb://pms-appointment-service
+#          predicates:
+#            - Path=/api/appointment/**
+#          filters:
+#            - StripPrefix=0
             
         # 通知服务路由
         - id: pms-notice-service
@@ -63,21 +63,21 @@ spring:
           filters:
             - StripPrefix=0
             
-        # 学生服务路由
-        - id: pms-student-service
-          uri: lb://pms-student-service
-          predicates:
-            - Path=/api/student/**
-          filters:
-            - StripPrefix=0
-            
-        # 教师服务路由
-        - id: pms-teacher-service
-          uri: lb://pms-teacher-service
-          predicates:
-            - Path=/api/teachers/**
-          filters:
-            - StripPrefix=0
+#        # 学生服务路由
+#        - id: pms-student-service
+#          uri: lb://pms-student-service
+#          predicates:
+#            - Path=/api/student/**
+#          filters:
+#            - StripPrefix=0
+#
+#        # 教师服务路由
+#        - id: pms-teacher-service
+#          uri: lb://pms-teacher-service
+#          predicates:
+#            - Path=/api/teachers/**
+#          filters:
+#            - StripPrefix=0
             
         # 聊天服务路由
         - id: pms-chat-service
@@ -87,13 +87,13 @@ spring:
           filters:
             - StripPrefix=0
             
-        # 地区服务路由
-        - id: pms-region-service
-          uri: lb://pms-region-service
-          predicates:
-            - Path=/api/region/**
-          filters:
-            - StripPrefix=0
+#        # 地区服务路由
+#        - id: pms-region-service
+#          uri: lb://pms-region-service
+#          predicates:
+#            - Path=/api/region/**
+#          filters:
+#            - StripPrefix=0
         # 全局页面转发路由
         - id: main-web
           uri: http://localhost:8081
